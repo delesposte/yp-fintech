@@ -1,4 +1,4 @@
-#Intação inicial
+#Inicialização
 npm init
 npm i --save-dev typescript 
 npx tsc --init
