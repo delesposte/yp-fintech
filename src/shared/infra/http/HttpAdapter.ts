@@ -1,7 +1,7 @@
 import IHttp from "./IHttp";
 import express from "express";
 
-export default class ExpressAdapter implements IHttp {
+export default class HttpAdapter implements IHttp {
   private app: any;
 
   constructor() {

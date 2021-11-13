@@ -1,9 +1,9 @@
-import ExpressAdapter from "./shared/infra/http/ExpressAdapter";
+import HttpAdapter from "./shared/infra/http/HttpAdapter";
 import Router from "./shared/infra/http/Router";
 
-export class App {
+class App {
   static execute() {
-    const http = new ExpressAdapter();
+    const http = new HttpAdapter();
     Router.new(http, null, null);
     http.listen(3000);
   }

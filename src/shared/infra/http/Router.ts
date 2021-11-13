@@ -2,7 +2,7 @@ import IHttp from "./IHttp";
 
 export default class Router {
 
-  constructor(readonly http: IHttp, readonly databaseConnection: any, readonly eventBus: any) {
+  constructor(readonly http: IHttp, readonly IDatabaseConnection: any, readonly eventBus: any) {
     this.configure();
   }
 
@@ -12,7 +12,7 @@ export default class Router {
     });
   }
 
-  static new(http: IHttp, databaseConnection: any, eventBus: any) {
-    return new Router(http, databaseConnection, eventBus);
+  static new(http: IHttp, IDatabaseConnection: any, eventBus: any) {
+    return new Router(http, IDatabaseConnection, eventBus);
   }
 }

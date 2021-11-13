@@ -6,6 +6,7 @@
   "scripts": {
     "debug": "npx tsnd --respawn --transpile-only --ignore-watch node_modules --no-notify --cls --rs ./src/index.ts",
     "test": "jest --watchAll --detectOpenHandles",
+    "testSingle": "npx jest ./ops-lotes.test.js --watchAll --detectOpenHandles",    
     "coverage": "jest --coverage",
     "build": "tsc --build",
     "start": "node dist/index.js"
