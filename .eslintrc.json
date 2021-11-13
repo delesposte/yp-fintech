@@ -1,0 +1,31 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@shopify/typescript",
+    "plugin:@shopify/typescript-type-checking"
+  ],
+  "parserOptions": {
+    "project": "tsconfig.json"
+  },
+  "rules": {
+    "@shopify/binary-assignment-parens": 0,
+    "@typescript-eslint/no-unnecessary-condition": "warn",
+    "babel/object-curly-spacing": "off",
+    "@typescript-eslint/object-curly-spacing": "off",
+    "babel/semi": "off",
+    "no-process-env": "off",
+    "import/no-anonymous-default-export": [
+      2,
+      {
+        "allowObject": true
+      }
+    ]
+  }
+}
