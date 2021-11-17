@@ -1,6 +1,6 @@
-import Account from "../../../domain/entity/Account";
-import IDatabaseConnection from "../../../../shared/infra/database/IDatabaseConnection";
-import IAccountRepository from "../../../domain/repository/IAccountRepository";
+import Account from "../../domain/entity/Account";
+import IDatabaseConnection from "../../../shared/infra/database/IDatabaseConnection";
+import IAccountRepository from "../../domain/repository/IAccountRepository";
 
 export default class AccountRepositoryDatabase implements IAccountRepository {
   constructor(readonly IDatabaseConnection: IDatabaseConnection) { }
@@ -9,7 +9,7 @@ export default class AccountRepositoryDatabase implements IAccountRepository {
     
   }
 
-  async get(code: string): Promise<Account> {
+  async get(code: number): Promise<Account> {
     return new Account("", "", "", "");
   }
 

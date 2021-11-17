@@ -3,32 +3,53 @@ import Cpf from "./Cpf";
 import Phone from "./Phone";
 
 export default class Account {
-  private codeObj: AccountCode;
-  private cpfObj: Cpf;
-  private phoneObj: Phone;
-  readonly name: string;
-  readonly adress: string;
+  private fCode: AccountCode;
+  private fCpf: Cpf;
+  private fPhone: Phone;
+  private fDisabledAt: Date | unknown = null;
+  private fName: string = '';
+  adress: string;
   readonly createdAt: Date;
 
-  constructor(name: string, cpf: string, phone: string, adress: string) {
-    this.codeObj = new AccountCode();
-    if (!name || !name.trim()) throw new Error("Invalid name");
+  constructor(name: string, cpf: string, phone: string, adress: string, codeValue: number = 0) {
+    this.fCode = new AccountCode(codeValue);
     this.name = name;
-    this.cpfObj = new Cpf(cpf);
-    this.phoneObj = new Phone(phone);
+    this.fCpf = new Cpf(cpf);
+    this.fPhone = new Phone(phone);
     this.adress = adress;
     this.createdAt = new Date();
   }
 
+  set name(value: string) {
+    if (!value || !value.trim()) throw new Error("Invalid name");
+    this.fName = value;
+  }
+
+  get name() {
+    return this.fName;
+  }
+
   get code() {
-    return this.codeObj.value;
+    return this.fCode.value;
   }
 
   get cpf() {
-    return this.cpfObj.value;
+    return this.fCpf.value;
   }
 
   get phone() {
-    return this.phoneObj.value;
+    return this.fPhone.value;
+  }
+
+  disable() {
+    this.fDisabledAt = new Date();
+  }
+
+  enable() {
+    this.fDisabledAt = null;
+  }
+
+  get disabledAt() {
+    return this.fDisabledAt;
   }
 }

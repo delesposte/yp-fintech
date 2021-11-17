@@ -6,7 +6,7 @@ export default class Router {
     this.configure();
   }
 
-  configure() {
+  private configure() {
     this.http.on("/", "get", async (params: any, body: any) => {
       return { status: "ok" };
     });
