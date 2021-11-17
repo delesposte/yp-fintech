@@ -1,9 +1,9 @@
 import Cpf from "../../src/account/domain/entity/Cpf"
 
-const VALID_CPF = "12396185730";
+const VALID_CPF = "45307768087";
 
 test("Deve validar um CPF", function () {
-  const CPF = "123.961.857-30";
+  const CPF = "453.077.680-87";
   const sut = new Cpf(CPF);
   expect(sut.value).toBe(VALID_CPF);
 });
