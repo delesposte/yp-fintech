@@ -3,7 +3,7 @@ import CreateAccount from "../../src/account/aplication/usecase/CreateAccount";
 import ChangeAccount from "../../src/account/aplication/usecase/ChangeAccount";
 import DatabaseConnectionAdapter from "../../src/shared/infra/database/DatabaseConnectionAdapter";
 import AccountRepositoryFactoryDatabase from "../../src/account/infra/factory/AccountRepositoryFactoryDatabase";
-import AccountRepositoryFactoryMemory from "../../src/account/infra/factory/AccountRepositoryFactoryMemory";
+import AccountRepositoryMemory from "../../src/account/infra/repository/AccountRepositoryMemory";
 
 test.skip("Deve alterar uma conta no banco de dados", async function () {
   const databaseConnection = new DatabaseConnectionAdapter();
@@ -12,10 +12,10 @@ test.skip("Deve alterar uma conta no banco de dados", async function () {
 
 test("Deve alterar uma conta em memória", async function () {
   const memory: any = [];
-  const accountRepositoryFactory = new AccountRepositoryFactoryMemory(memory);
+  const accountRepository = new AccountRepositoryMemory(memory);
   const createInput = new CreateAccountInput("Zezinho Legal", "453.077.680-87", "28999466070", "Rua legal");
-  const createAccount = new CreateAccount(accountRepositoryFactory);
-  const changeAccount = new ChangeAccount(accountRepositoryFactory);
+  const createAccount = new CreateAccount(accountRepository);
+  const changeAccount = new ChangeAccount(accountRepository);
   const createOutput = await createAccount.execute(createInput);
   const changeOutput = await changeAccount.execute(createOutput.code, "Zezinho Legal new", "Rua legal new");
   expect(changeOutput.code === changeOutput.code).toBeTruthy();
@@ -25,10 +25,10 @@ test("Deve alterar uma conta em memória", async function () {
 
 test("Não deve alterar uma conta em memória sem nome", async function () {
   const memory: any = [];
-  const accountRepositoryFactory = new AccountRepositoryFactoryMemory(memory);
+  const accountRepository = new AccountRepositoryMemory(memory);
   const createInput = new CreateAccountInput("Zezinho Legal", "453.077.680-87", "28999466070", "Rua legal");
-  const createAccount = new CreateAccount(accountRepositoryFactory);
-  const changeAccount = new ChangeAccount(accountRepositoryFactory);
+  const createAccount = new CreateAccount(accountRepository);
+  const changeAccount = new ChangeAccount(accountRepository);
   const createOutput = await createAccount.execute(createInput);
   await expect(changeAccount.execute(createOutput.code, " ", "Rua legal")).rejects.toThrow(new Error("Invalid name"));
 });

@@ -5,11 +5,7 @@ import AccountOutput from "../dto/AccountOutput";
 import AccountOutputAssembler from "../dto/AccountOutputAssembler";
 
 export default class ChangeAccount {
-  private accountRepository: IAccountRepository;
-
-  constructor(abstractAccountRepositoryFactory: IAbstractAccountRepositoryFactory) {
-    this.accountRepository = abstractAccountRepositoryFactory.createAccountRepository();
-  }
+  constructor(private readonly accountRepository: IAccountRepository) { }
 
   async execute(code: number, name: string, adress: string): Promise<AccountOutput> {
     const account = await this.accountRepository.get(code);

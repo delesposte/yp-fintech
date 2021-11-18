@@ -7,11 +7,7 @@ import IAccountRepository from "../../domain/repository/IAccountRepository";
 import AccountOutputAssembler from "../dto/AccountOutputAssembler";
 
 export default class CreateAccount {
-  private accountRepository: IAccountRepository;
-
-  constructor(abstractAccountRepositoryFactory: IAbstractAccountRepositoryFactory) {
-    this.accountRepository = abstractAccountRepositoryFactory.createAccountRepository();
-  }
+  constructor(private readonly accountRepository: IAccountRepository) { }
 
   async execute(input: CreateAccountInput): Promise<AccountOutput> {
     const accountByCpf = await this.accountRepository.getByCpf(input.cpf);
