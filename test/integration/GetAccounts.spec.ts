@@ -11,7 +11,7 @@ test.skip("Deve recuperar duas contas no banco de dados", async function () {
   const accountRepositoryFactory = new AccountRepositoryFactoryDatabase(databaseConnection);
 });
 
-test.skip("Deve recuperar duas contas em memória", async function () {
+test("Deve recuperar duas contas em memória", async function () {
   const memory: any = [];
   const accountRepositoryFactory = new AccountRepositoryFactoryMemory(memory);
   const accountDAO = new AccountDAOMemory(memory);

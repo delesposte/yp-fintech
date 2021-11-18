@@ -4,7 +4,7 @@ import Router from "./shared/infra/http/Router";
 class App {
   static execute() {
     const http = new HttpAdapter();
-    Router.new(http, null, null);
+    Router.new(http, null);
     http.listen(3000);
   }
 }
