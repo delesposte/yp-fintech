@@ -12,7 +12,8 @@ test.skip("Deve ativar uma conta no banco de dados", async function () {
 });
 
 test("Deve ativar uma conta em memória", async function () {
-  const accountRepositoryFactory = new AccountRepositoryFactoryMemory();
+  const memory: any = [];
+  const accountRepositoryFactory = new AccountRepositoryFactoryMemory(memory);
   const createInput = new CreateAccountInput("Zezinho Legal", "453.077.680-87", "28999466070", "Rua legal");
   const createAccount = new CreateAccount(accountRepositoryFactory);
   const disableAccount = new DisableAccount(accountRepositoryFactory);

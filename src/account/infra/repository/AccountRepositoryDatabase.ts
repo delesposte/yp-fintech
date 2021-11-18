@@ -6,10 +6,14 @@ export default class AccountRepositoryDatabase implements IAccountRepository {
   constructor(readonly IDatabaseConnection: IDatabaseConnection) { }
 
   async save(account: Account): Promise<void> {
-    
+
   }
 
   async get(code: number): Promise<Account> {
+    return new Account("", "", "", "");
+  }
+
+  async getByCpf(cpf: string): Promise<Account | unknown> {
     return new Account("", "", "", "");
   }
 

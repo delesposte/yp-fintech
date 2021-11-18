@@ -11,21 +11,21 @@ test.skip("Deve alterar uma conta no banco de dados", async function () {
 });
 
 test("Deve alterar uma conta em memória", async function () {
-  const accountRepositoryFactory = new AccountRepositoryFactoryMemory();
-  const name = "Zezinho Legal";
-  const adress = "Rua legal";
-  const createInput = new CreateAccountInput(name, "453.077.680-87", "28999466070", adress);
+  const memory: any = [];
+  const accountRepositoryFactory = new AccountRepositoryFactoryMemory(memory);
+  const createInput = new CreateAccountInput("Zezinho Legal", "453.077.680-87", "28999466070", "Rua legal");
   const createAccount = new CreateAccount(accountRepositoryFactory);
   const changeAccount = new ChangeAccount(accountRepositoryFactory);
   const createOutput = await createAccount.execute(createInput);
-  const changeOutput = await changeAccount.execute(createOutput.code, name + "new", adress + "new");
+  const changeOutput = await changeAccount.execute(createOutput.code, "Zezinho Legal new", "Rua legal new");
   expect(changeOutput.code === changeOutput.code).toBeTruthy();
-  expect(changeOutput.name === name + "new").toBeTruthy();
-  expect(changeOutput.adress === adress + "new").toBeTruthy();
+  expect(changeOutput.name === "Zezinho Legal new").toBeTruthy();
+  expect(changeOutput.adress === "Rua legal new").toBeTruthy();
 });
 
 test("Não deve alterar uma conta em memória sem nome", async function () {
-  const accountRepositoryFactory = new AccountRepositoryFactoryMemory();
+  const memory: any = [];
+  const accountRepositoryFactory = new AccountRepositoryFactoryMemory(memory);
   const createInput = new CreateAccountInput("Zezinho Legal", "453.077.680-87", "28999466070", "Rua legal");
   const createAccount = new CreateAccount(accountRepositoryFactory);
   const changeAccount = new ChangeAccount(accountRepositoryFactory);
