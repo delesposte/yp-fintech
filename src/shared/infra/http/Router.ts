@@ -1,18 +1,22 @@
+import AccountsController from "account/infra/controller/AccountsController";
+import IDatabaseConnection from "../database/IDatabaseConnection";
 import IHttp from "./IHttp";
 
 export default class Router {
 
-  constructor(readonly http: IHttp, readonly IDatabaseConnection: any) {
+  constructor(readonly http: IHttp, readonly IDatabaseConnection: IDatabaseConnection) {
     this.configure();
   }
 
   private configure() {
     this.http.on("/accounts", "get", async (params: any, body: any) => {
-      return { status: "ok" };
+      const accountsController = new AccountsController(this.IDatabaseConnection);
+      return accountsController.getAccounts(params, body);
     });
 
     this.http.on("/accounts", "post", async (params: any, body: any) => {
-      return { status: "ok" };
+      const accountsController = new AccountsController(this.IDatabaseConnection);
+      return accountsController.CreateAccount(params, body);
     });
 
     this.http.on("/accounts/:code/disable", "post", async (params: any, body: any) => {
