@@ -9,26 +9,29 @@ export default class Router {
   }
 
   private configure() {
-    this.http.on("/accounts", "get", async (params: any, body: any) => {
-      const accountsController = new AccountsController(this.IDatabaseConnection);
-      return accountsController.getAccounts(params, body);
-    });
-
     this.http.on("/accounts", "post", async (params: any, body: any) => {
       const accountsController = new AccountsController(this.IDatabaseConnection);
-      return accountsController.CreateAccount(params, body);
-    });
-
-    this.http.on("/accounts/:code/disable", "post", async (params: any, body: any) => {
-      return { status: "ok" };
-    });
-
-    this.http.on("/accounts/:code/enable", "post", async (params: any, body: any) => {
-      return { status: "ok" };
+      return accountsController.createAccount(params, body);
     });
 
     this.http.on("/accounts/:code", "patch", async (params: any, body: any) => {
-      return { status: "ok" };
+      const accountsController = new AccountsController(this.IDatabaseConnection);
+      return accountsController.changeAccount(params, body);
+    });
+
+    this.http.on("/accounts/:code/disable", "post", async (params: any, body: any) => {
+      const accountsController = new AccountsController(this.IDatabaseConnection);
+      return accountsController.disableAccount(params, body);
+    });
+
+    this.http.on("/accounts/:code/enable", "post", async (params: any, body: any) => {
+      const accountsController = new AccountsController(this.IDatabaseConnection);
+      return accountsController.enableAccount(params, body);
+    });
+
+    this.http.on("/accounts", "get", async (params: any, body: any) => {
+      const accountsController = new AccountsController(this.IDatabaseConnection);
+      return accountsController.getAccounts(params, body);
     });
   }
 

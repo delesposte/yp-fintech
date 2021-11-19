@@ -1,5 +1,3 @@
-
-import IAbstractAccountRepositoryFactory from "../../domain/factory/IAbstractAccountRepositoryFactory";
 import Account from "../../domain/entity/Account";
 import CreateAccountInput from "../dto/CreateAccountInput";
 import AccountOutput from "../dto/AccountOutput";

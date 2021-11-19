@@ -5,12 +5,14 @@ import IAccountRepository from "../../domain/repository/IAccountRepository";
 export default class AccountRepositoryDatabase implements IAccountRepository {
   constructor(readonly IDatabaseConnection: IDatabaseConnection) { }
 
-  async save(account: Account): Promise<void> {
+  async save(account: Account): Promise<void> { }
 
+  async getByCode(code: number): Promise<Account> {
+    return new Account("", "", "", "");
   }
 
-  async get(code: number): Promise<Account> {
-    return new Account("", "", "", "");
+  async getAll(): Promise<Account[]> {
+    return [];
   }
 
   async getByCpf(cpf: string): Promise<Account | unknown> {
