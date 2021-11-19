@@ -1,37 +1,44 @@
-import GetAccounts from "account/aplication/query/GetAccounts";
-import ChangeAccount from "account/aplication/usecase/ChangeAccount";
-import CreateAccount from "account/aplication/usecase/CreateAccount";
-import DisableAccount from "account/aplication/usecase/DisableAccount";
-import EnableAccount from "account/aplication/usecase/EnableAccount";
+import GetAccounts from "../../aplication/query/GetAccounts";
+import ChangeAccount from "../../aplication/usecase/ChangeAccount";
+import CreateAccount from "../../aplication/usecase/CreateAccount";
+import DisableAccount from "../../aplication/usecase/DisableAccount";
+import EnableAccount from "../../aplication/usecase/EnableAccount";
+import IAccountRepository from "../../domain/repository/IAccountRepository";
 import IDatabaseConnection from "shared/infra/database/IDatabaseConnection";
-import AccountDAODatabase from "../DAO/AccountDAODatabase";
-import AccountRepositoryDatabase from "../repository/AccountRepositoryDatabase";
+import AccountRepositoryFactory from "../factory/AccountRepositoryFactory";
+import CreateAccountInputAssembler from "../../aplication/dto/CreateAccountInputAssembler";
 
 export default class AccountsController {
-  constructor(readonly databaseConnection: IDatabaseConnection) { }
+  private accountRepository: IAccountRepository;
 
-  async createAccount(params: any, body: any) {
-    const createAccount = new CreateAccount(new AccountRepositoryDatabase(this.databaseConnection));
-    return await createAccount.execute(body);
+  constructor(readonly databaseConnection: IDatabaseConnection) {
+    const accountRepositoryFactory = new AccountRepositoryFactory(this.databaseConnection);
+    this.accountRepository = accountRepositoryFactory.createAccountRepository();
   }
 
-  async changeAccount(params: any, body: any) {
-    const changeAccount = new ChangeAccount(new AccountRepositoryDatabase(this.databaseConnection));
-    return await changeAccount.execute(body.code, body.nem, body.adress);
+  async createAccount(body: any) {
+    const createAccount = new CreateAccount(this.accountRepository);
+    const createInput = CreateAccountInputAssembler.assembly(body);
+    return await createAccount.execute(createInput);
   }
 
-  async disableAccount(params: any, body: any) {
-    const disableAccount = new DisableAccount(new AccountRepositoryDatabase(this.databaseConnection));
-    return await disableAccount.execute(body.code);
+  async changeAccount(body: any) {
+    const changeAccount = new ChangeAccount(this.accountRepository);
+    return await changeAccount.execute(Number(body.code), body.name, body.adress);
   }
 
-  async enableAccount(params: any, body: any) {
-    const enabledAccount = new EnableAccount(new AccountRepositoryDatabase(this.databaseConnection));
-    return await enabledAccount.execute(body.code);
+  async disableAccount(params: any) {
+    const disableAccount = new DisableAccount(this.accountRepository);
+    return await disableAccount.execute(Number(params.code));
   }
 
-  async getAccounts(params: any, body: any) {
-    const getAccounts = new GetAccounts(new AccountDAODatabase(this.databaseConnection));
+  async enableAccount(params: any) {
+    const enabledAccount = new EnableAccount(this.accountRepository);
+    return await enabledAccount.execute(Number(params.code));
+  }
+
+  async getAccounts() {
+    const getAccounts = new GetAccounts(this.accountRepository);
     return getAccounts.execute();
   }
 }

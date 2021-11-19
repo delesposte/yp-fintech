@@ -16,7 +16,7 @@ export default class AccountRepositoryMemory implements IAccountRepository {
     const accountData = this.memory.find(item => item.code === code);
     if (!accountData) throw new Error("Account not found");
     const account = new Account(accountData.name, accountData.cpf, accountData.phone,
-      accountData.adress, accountData.code);
+      accountData.adress, accountData.code, accountData.createdAt, accountData.disabledAt);
     return account;
   }
 
@@ -24,7 +24,7 @@ export default class AccountRepositoryMemory implements IAccountRepository {
     const accounts: Account[] = [];
     for (const accountData of this.memory)
       accounts.push(new Account(accountData.name, accountData.cpf, accountData.phone,
-        accountData.adress, accountData.code));
+        accountData.adress, accountData.code, accountData.createdAt, accountData.disabledAt));
     return accounts;
   }
 
@@ -32,7 +32,7 @@ export default class AccountRepositoryMemory implements IAccountRepository {
     if (!cpf) throw new Error("Account cpf not informed");
     const accountData = this.memory.find(item => item.cpf === cpf);
     if (accountData) return new Account(accountData.name, accountData.cpf, accountData.phone,
-      accountData.adress, accountData.code);
+      accountData.adress, accountData.code, accountData.createdAt, accountData.disabledAt);
     return null;
   }
 

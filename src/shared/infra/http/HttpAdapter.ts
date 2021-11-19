@@ -1,10 +1,12 @@
 import IHttp from "./IHttp";
+import HttpStatus from "./HttpStatus";
 import express from "express";
+import Config from "../config/config";
 
 export default class HttpAdapter implements IHttp {
   private app: any;
 
-  constructor() {
+  constructor(private readonly config: Config) {
     this.app = express();
     this.app.all("*", function (req: any, res: any, next: any) {
       res.header("Access-Control-Allow-Origin", "*");
@@ -17,12 +19,16 @@ export default class HttpAdapter implements IHttp {
 
   on(url: string, method: string, fn: any): void {
     this.app[method](url, async function (req: any, res: any) {
-      const result = await fn(req.params, req.body);
-      res.json(result);
+      try {
+        const result = await fn(req.params, req.body);
+        res.json(result);
+      } catch (error: any) {
+        res.status(HttpStatus.InternalServerError).json(error.message);
+      }
     });
   }
 
-  listen(port: number): void {
-    this.app.listen(port);
+  listen(): void {
+    this.app.listen(this.config.API_PORT, () => console.log('API is running on ' + this.config.API_URL));
   }
 }

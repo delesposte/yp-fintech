@@ -8,16 +8,18 @@ export default class Account {
   private fPhone: Phone;
   private fDisabledAt: Date | unknown = null;
   private fName: string = '';
-  adress: string;
-  readonly createdAt: Date;
+  public adress: string;
+  public readonly createdAt: Date;
 
-  constructor(name: string, cpf: string, phone: string, adress: string, codeValue: number = 0) {
+  constructor(name: string, cpf: string, phone: string, adress: string, codeValue: number = 0,
+    createdAt: Date = new Date(), DisabledAt: Date | unknown = null) {
     this.fCode = new AccountCode(codeValue);
     this.name = name;
     this.fCpf = new Cpf(cpf);
     this.fPhone = new Phone(phone);
     this.adress = adress;
-    this.createdAt = new Date();
+    this.createdAt = createdAt;
+    this.fDisabledAt = DisabledAt;
   }
 
   set name(value: string) {
