@@ -2,8 +2,9 @@ import IHttp from "./IHttp";
 import HttpStatus from "./HttpStatus";
 import express from "express";
 import Config from "../config/config";
+import HttpError from "./HttpError";
 
-export default class HttpAdapter implements IHttp {
+export default class HttpServer implements IHttp {
   private app: any;
 
   constructor(private readonly config: Config) {
@@ -17,13 +18,16 @@ export default class HttpAdapter implements IHttp {
     this.app.use(express.json());
   }
 
-  on(url: string, method: string, fn: any): void {
+  on(url: string, method: string, successStatusCode: number, fn: any): void {
     this.app[method](url, async function (req: any, res: any) {
       try {
         const result = await fn(req.params, req.body);
-        res.json(result);
+        res.status(successStatusCode).json(result);
       } catch (error: any) {
-        res.status(HttpStatus.InternalServerError).json(error.message);
+        if (error instanceof HttpError)
+          res.status(error.errorStatusCode).json(error.message);
+        else
+          res.status(HttpStatus.InternalServerError).json(error.message);
       }
     });
   }

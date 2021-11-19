@@ -1,9 +1,12 @@
+import HttpStatus from "../../../shared/infra/http/HttpStatus";
+import HttpError from "../../../shared/infra/http/HttpError";
+
 export default class Phone {
   private readonly VALID_LENGTH = 11;
   value: string = "";
 
   constructor(value: string) {
-    if (!this.validate(value)) throw new Error("Invalid phone");
+    if (!this.validate(value)) throw new HttpError(HttpStatus.BadRequest, "Invalid phone");
   }
 
   private validate(rawPhone: string) {

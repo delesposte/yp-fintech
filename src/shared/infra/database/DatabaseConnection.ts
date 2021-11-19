@@ -1,7 +1,7 @@
 import Config from "../config/config";
 import IDatabaseConnection from "./IDatabaseConnection";
 
-export default class DatabaseConnectionAdapter implements IDatabaseConnection {
+export default class DatabaseConnection implements IDatabaseConnection {
   public config: Config;
 
   constructor(config: Config) {
