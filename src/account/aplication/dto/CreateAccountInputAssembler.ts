@@ -1,4 +1,3 @@
-import Account from "../../domain/entity/Account";
 import CreateAccountInput from "./CreateAccountInput";
 
 export default class CreateAccountInputAssembler {

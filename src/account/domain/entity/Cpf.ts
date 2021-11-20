@@ -1,3 +1,5 @@
+import { EBadRequest } from "../../../shared/extend/Errors";
+
 export default class Cpf {
   private readonly VALID_LENGTH = 11;
   private readonly FACTOR_FIRST_VERIFIER_DIGIT = 10;
@@ -5,7 +7,7 @@ export default class Cpf {
   value: string = "";
 
   constructor(value: string) {
-    if (!this.validate(value)) throw new Error("Invalid cpf");
+    if (!this.validate(value)) throw new EBadRequest("Invalid cpf");
   }
 
   private validate(rawCpf: string) {

@@ -2,7 +2,7 @@ import IHttp from "./IHttp";
 import HttpStatus from "./HttpStatus";
 import express from "express";
 import Config from "../config/config";
-import HttpError from "./HttpError";
+import { EBadRequest, ENotFound, EUnauthorized, EForbidden } from "../../extend/Errors";
 
 export default class HttpServer implements IHttp {
   private app: any;
@@ -24,8 +24,14 @@ export default class HttpServer implements IHttp {
         const result = await fn(req.params, req.body);
         res.status(successStatusCode).json(result);
       } catch (error: any) {
-        if (error instanceof HttpError)
-          res.status(error.errorStatusCode).json(error.message);
+        if (error instanceof EBadRequest)
+          res.status(HttpStatus.BadRequest).json(error.message);
+        else if (error instanceof ENotFound)
+          res.status(HttpStatus.NotFound).json(error.message);
+        else if (error instanceof EUnauthorized)
+          res.status(HttpStatus.Unauthorized).json(error.message);
+        else if (error instanceof EForbidden)
+          res.status(HttpStatus.Forbidden).json(error.message);
         else
           res.status(HttpStatus.InternalServerError).json(error.message);
       }
