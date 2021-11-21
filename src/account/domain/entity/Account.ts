@@ -44,6 +44,10 @@ export default class Account {
     return this.fPhone.value;
   }
 
+  set phone(value: string) {
+    this.fPhone = new Phone(value);
+  }
+
   disable() {
     if (this.fDisabledAt) throw new EBadRequest("Account is already disabled");
     this.fDisabledAt = new Date();

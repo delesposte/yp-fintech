@@ -24,7 +24,7 @@ export default class AccountsController {
 
   async changeAccount(body: any) {
     const changeAccount = new ChangeAccount(this.accountRepository);
-    return await changeAccount.execute(Number(body.code), body.name, body.adress);
+    return await changeAccount.execute(Number(body.code), body.phone, body.adress);
   }
 
   async disableAccount(params: any) {

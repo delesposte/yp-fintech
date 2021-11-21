@@ -11,17 +11,17 @@ test("Deve alterar uma conta em memória", async function () {
   const createAccount = new CreateAccount(accountRepository);
   const changeAccount = new ChangeAccount(accountRepository);
   const createOutput = await createAccount.execute(createInput);
-  const changeOutput = await changeAccount.execute(createOutput.code, "Zezinho Legal new", "Rua legal new");
+  const changeOutput = await changeAccount.execute(createOutput.code, "28999467777", "Rua legal new");
   expect(changeOutput.code).toBe(changeOutput.code);
-  expect(changeOutput.name).toBe("Zezinho Legal new");
+  expect(changeOutput.phone).toBe("28999467777");
   expect(changeOutput.adress).toBe("Rua legal new");
 });
 
-test("Não deve alterar uma conta em memória sem nome", async function () {
+test("Não deve alterar uma conta em memória sem telefone", async function () {
   const accountRepository = new AccountRepositoryMemory();
   const createInput = new CreateAccountInput("Zezinho Legal", "453.077.680-87", "28999466070", "Rua legal");
   const createAccount = new CreateAccount(accountRepository);
   const changeAccount = new ChangeAccount(accountRepository);
   const createOutput = await createAccount.execute(createInput);
-  await expect(changeAccount.execute(createOutput.code, " ", "Rua legal")).rejects.toThrow(new EBadRequest("Invalid name"));
+  await expect(changeAccount.execute(createOutput.code, " ", "Rua legal")).rejects.toThrow(new EBadRequest("Invalid phone"));
 });

@@ -70,7 +70,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Zezinho Legal\",\r\n  \"cpf\": \"453.077.680-87\",\r\n  \"phone\": \"28999466070\",\r\n  \"adress\": \"Rua legal\"\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -78,13 +78,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{dominio}}/accounts/1637296466638/disable",
+							"raw": "{{dominio}}/accounts/1637516471217/disable",
 							"host": [
 								"{{dominio}}"
 							],
 							"path": [
 								"accounts",
-								"1637296466638",
+								"1637516471217",
 								"disable"
 							]
 						}
@@ -98,7 +98,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Zezinho Legal\",\r\n  \"cpf\": \"453.077.680-87\",\r\n  \"phone\": \"28999466070\",\r\n  \"adress\": \"Rua legal\"\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -106,13 +106,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{dominio}}/accounts/1637296466638/enable",
+							"raw": "{{dominio}}/accounts/1637516471217/enable",
 							"host": [
 								"{{dominio}}"
 							],
 							"path": [
 								"accounts",
-								"1637296466638",
+								"1637516471217",
 								"enable"
 							]
 						}
@@ -126,7 +126,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"code\": 1637296720292,\r\n    \"name\": \"Zezinho Legal 2\",\r\n    \"cpf\": \"45307768087\",\r\n    \"phone\": \"28999466070\",\r\n    \"adress\": \"Rua legal\",\r\n    \"createdAt\": \"2021-11-19T04:38:40.292Z\",\r\n    \"disabledAt\": null\r\n}",
+							"raw": "{\r\n    \"code\": 1637516471217,\r\n    \"phone\": \"28999466070\",\r\n    \"adress\": \"Rua legal\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
