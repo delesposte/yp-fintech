@@ -9,7 +9,7 @@
     "test:single": "npx jest ./ops-lotes.test.js --detectOpenHandles",
     "test:coverage": "jest --coverage",
     "build": "rimraf dist && tsc --build",
-    "start": "nodemon dist/index.js"
+    "start": "nodemon --watch dist -e js ./dist/index.js"
   },
   "author": "",
   "license": "ISC",
