@@ -13,7 +13,7 @@ export default class Router {
 
   private configure() {
     this.http.on("/", "get", HttpStatus.OK, async (params: any, body: any) => {
-      return { message: 'API is running on... ' + this.DatabaseConnection.config.API_URL};
+      return { message: 'API is running on ' + this.DatabaseConnection.config.API_URL};
     });
 
     this.http.on("/accounts", "post", HttpStatus.Created, async (params: any, body: any) => {
