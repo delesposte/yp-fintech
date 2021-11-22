@@ -20,7 +20,7 @@ npm run deploy
 ```
 
 ## ⚙️ Testes 
-Importe a collection do Postman
+Importe a collection no Postman
 ```
 postman.json
 ```
