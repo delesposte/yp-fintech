@@ -1,4 +1,4 @@
-# yp-fintech
+# Yp Fintech
 Exemplo de API com TypeScript + Clean Architecture + TypeORM + Postgresql + Express + Docker
 
 ## 🔧 Instalação & Execução
@@ -21,6 +21,16 @@ npm run deploy
 Importe a collection do Postman
 ```
 postman.json
+```
+
+A collection possui os métodos
+```
+ - getIsAPIRunning -> Testa se a API está executando
+ - getAccounts -> Recupera a lista de contas cadastradas
+ - createAccount -> Cria uma conta. Obs.: só é permitido uma conta por CPF
+ - disableAccount -> Desativa uma conta
+ - enableAccount -> Ativa uma conta
+ - changeAccount -> Altera uma conta. Obs.: só é permitido o telefone e o endereço
 ```
 
 ## 🛠️ Construído com
