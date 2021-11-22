@@ -1,5 +1,5 @@
 import Cpf from "../../src/account/domain/entity/Cpf";
-import { EBadRequest } from "../../src/shared/extend/Errors";
+import { BadRequestError } from "../../src/shared/extend/Errors";
 
 const VALID_CPF = "45307768087";
 
@@ -11,5 +11,5 @@ test("Deve validar um CPF", function () {
 
 test("Não deve validar um cpf", function () {
   const sut = () => new Cpf("111.111.111-11");
-  expect(sut).toThrow(new EBadRequest("Invalid cpf"));
+  expect(sut).toThrow(new BadRequestError("Invalid cpf"));
 });

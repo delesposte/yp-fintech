@@ -1,11 +1,11 @@
-import { EBadRequest } from "../../../shared/extend/Errors";
+import { BadRequestError } from "../../../shared/extend/Errors";
 
 export default class Phone {
   private readonly VALID_LENGTH = 11;
   value: string = "";
 
   constructor(value: string) {
-    if (!this.validate(value)) throw new EBadRequest("Invalid phone");
+    if (!this.validate(value)) throw new BadRequestError("Invalid phone");
   }
 
   private validate(rawPhone: string) {

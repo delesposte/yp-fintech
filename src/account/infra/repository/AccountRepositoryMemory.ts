@@ -1,4 +1,4 @@
-import { EBadRequest, ENotFound } from "../../../shared/extend/Errors";
+import { BadRequestError, NotFoundError } from "../../../shared/extend/Errors";
 import IDatabaseConnection from "../../../shared/infra/database/IDatabaseConnection";
 import Account from "../../domain/entity/Account";
 import IAccountRepository from "../../domain/repository/IAccountRepository";
@@ -12,12 +12,12 @@ export default class AccountRepositoryMemory implements IAccountRepository {
     this.memory.push(account);
   }
 
-  async getByCode(code: number): Promise<Account | any> {
-    if (!code) throw new EBadRequest("Account code not informed");
+  async getByCode(code: number): Promise<Account | undefined> {
+    if (!code) throw new BadRequestError("Account code not informed");
     const accountData = this.memory.find(item => item.code === code);
     if (accountData) return new Account(accountData.name, accountData.cpf, accountData.phone,
       accountData.adress, accountData.code, accountData.createdAt, accountData.disabledAt);
-    return null;
+    return undefined;
   }
 
   async getAll(): Promise<Account[]> {
@@ -28,18 +28,18 @@ export default class AccountRepositoryMemory implements IAccountRepository {
     return accounts;
   }
 
-  async getByCpf(cpf: string): Promise<Account | any> {
-    if (!cpf) throw new EBadRequest("Account cpf not informed");
+  async getByCpf(cpf: string): Promise<Account | undefined> {
+    if (!cpf) throw new BadRequestError("Account cpf not informed");
     const accountData = this.memory.find(item => item.cpf === cpf);
     if (accountData) return new Account(accountData.name, accountData.cpf, accountData.phone,
       accountData.adress, accountData.code, accountData.createdAt, accountData.disabledAt);
-    return null;
+    return undefined;
   }
 
   async update(account: Account): Promise<void> {
-    if (!account) throw new EBadRequest("Account not informed");
+    if (!account) throw new BadRequestError("Account not informed");
     const accountData = this.memory.find(item => item.code === account.code);
-    if (!accountData) throw new ENotFound("Account not found");
+    if (!accountData) throw new NotFoundError("Account not found");
     Object.assign(accountData, account);
   }
 

@@ -2,6 +2,7 @@ import CreateAccountInput from "../../src/account/aplication/dto/CreateAccountIn
 import CreateAccount from "../../src/account/aplication/usecase/CreateAccount";
 import GetAccounts from "../../src/account/aplication/query/GetAccounts";
 import AccountRepositoryMemory from "../../src/account/infra/repository/AccountRepositoryMemory";
+import AccountOutput from "../../src/account/aplication/dto/AccountOutput";
 
 test("Deve recuperar duas contas em memória", async function () {
   const accountRepository = new AccountRepositoryMemory();
@@ -11,8 +12,12 @@ test("Deve recuperar duas contas em memória", async function () {
   const createOutputA = await createAccount.execute(createInputA);
   const createOutputB = await createAccount.execute(createInputB);
   const getAccounts = new GetAccounts(accountRepository);
-  const getOutputs = await getAccounts.execute();
-  expect(getOutputs.length).toBe(2);
-  expect(getOutputs[0].code).toBe(createOutputA.code);
-  expect(getOutputs[1].code).toBe(createOutputB.code);
+  const getOutputs: AccountOutput[] | undefined = await getAccounts.execute();
+  if (getOutputs) {
+    expect(getOutputs.length).toBe(2);
+    expect(getOutputs[0].code).toBe(createOutputA.code);
+    expect(getOutputs[1].code).toBe(createOutputB.code);
+  } else {
+    expect(getOutputs).toBeDefined();
+  }
 });

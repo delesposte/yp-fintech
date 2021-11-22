@@ -35,4 +35,8 @@ export class AccountEntity {
     nullable: true
   })
   disabledAt: Date = new Date();
+
+  constructor(accountEntity: AccountEntity) {
+    Object.assign(this, accountEntity);
+  }
 }

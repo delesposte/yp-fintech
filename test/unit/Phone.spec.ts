@@ -1,5 +1,5 @@
 import Phone from "../../src/account/domain/entity/Phone";
-import { EBadRequest } from "../../src/shared/extend/Errors";
+import { BadRequestError } from "../../src/shared/extend/Errors";
 
 const PHONE_VALID = "28999466070";
 
@@ -15,5 +15,5 @@ test("Deve validar um telefone sem máscara", function () {
 
 test("Não deve validar um telefone", function () {
   const sut = () => new Phone("9-9946-6070");
-  expect(sut).toThrow(new EBadRequest("Invalid phone"));
+  expect(sut).toThrow(new BadRequestError("Invalid phone"));
 });

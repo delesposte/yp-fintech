@@ -1,4 +1,4 @@
-import { EBadRequest } from "../../../shared/extend/Errors";
+import { BadRequestError } from "../../../shared/extend/Errors";
 
 export default class Cpf {
   private readonly VALID_LENGTH = 11;
@@ -7,7 +7,7 @@ export default class Cpf {
   value: string = "";
 
   constructor(value: string) {
-    if (!this.validate(value)) throw new EBadRequest("Invalid cpf");
+    if (!this.validate(value)) throw new BadRequestError("Invalid cpf");
   }
 
   private validate(rawCpf: string) {

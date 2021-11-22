@@ -3,7 +3,7 @@ import CreateAccount from "../../src/account/aplication/usecase/CreateAccount";
 import DisableAccount from "../../src/account/aplication/usecase/DisableAccount";
 import EnableAccount from "../../src/account/aplication/usecase/EnableAccount";
 import AccountRepositoryMemory from "../../src/account/infra/repository/AccountRepositoryMemory";
-import { EBadRequest } from "../../src/shared/extend/Errors";
+import { BadRequestError } from "../../src/shared/extend/Errors";
 
 test("Deve ativar uma conta em memória", async function () {
   const accountRepository = new AccountRepositoryMemory();
@@ -28,5 +28,5 @@ test("Não deve ativar uma conta em memória já ativa", async function () {
   const createOutput = await createAccount.execute(createInput);
   const disableOutput = await disableAccount.execute(createOutput.code);
   await enableAccount.execute(disableOutput.code);
-  await expect(enableAccount.execute(disableOutput.code)).rejects.toThrow(new EBadRequest("Account is already enabled"));
+  await expect(enableAccount.execute(disableOutput.code)).rejects.toThrow(new BadRequestError("Account is already enabled"));
 });

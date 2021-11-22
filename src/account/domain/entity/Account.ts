@@ -1,4 +1,4 @@
-import { EBadRequest } from "../../../shared/extend/Errors";
+import { BadRequestError } from "../../../shared/extend/Errors";
 import AccountCode from "./AccountCode";
 import Cpf from "./Cpf";
 import Phone from "./Phone";
@@ -24,7 +24,7 @@ export default class Account {
   }
 
   set name(value: string) {
-    if (!value || !value.trim()) throw new EBadRequest("Invalid name");
+    if (!value || !value.trim()) throw new BadRequestError("Invalid name");
     this.fName = value;
   }
 
@@ -49,12 +49,12 @@ export default class Account {
   }
 
   disable() {
-    if (this.fDisabledAt) throw new EBadRequest("Account is already disabled");
+    if (this.fDisabledAt) throw new BadRequestError("Account is already disabled");
     this.fDisabledAt = new Date();
   }
 
   enable() {
-    if (!this.fDisabledAt) throw new EBadRequest("Account is already enabled");
+    if (!this.fDisabledAt) throw new BadRequestError("Account is already enabled");
     this.fDisabledAt = null;
   }
 

@@ -3,7 +3,7 @@ import CreateAccount from "../../src/account/aplication/usecase/CreateAccount";
 import ChangeAccount from "../../src/account/aplication/usecase/ChangeAccount";
 import AccountRepositoryMemory from "../../src/account/infra/repository/AccountRepositoryMemory";
 import { anything, instance, mock, verify, when } from "ts-mockito";
-import { EBadRequest } from "../../src/shared/extend/Errors";
+import { BadRequestError } from "../../src/shared/extend/Errors";
 
 test("Deve alterar uma conta em memória", async function () {
   const accountRepository = new AccountRepositoryMemory();
@@ -23,5 +23,5 @@ test("Não deve alterar uma conta em memória sem telefone", async function () {
   const createAccount = new CreateAccount(accountRepository);
   const changeAccount = new ChangeAccount(accountRepository);
   const createOutput = await createAccount.execute(createInput);
-  await expect(changeAccount.execute(createOutput.code, " ", "Rua legal")).rejects.toThrow(new EBadRequest("Invalid phone"));
+  await expect(changeAccount.execute(createOutput.code, " ", "Rua legal")).rejects.toThrow(new BadRequestError("Invalid phone"));
 });

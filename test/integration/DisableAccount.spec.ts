@@ -2,7 +2,7 @@ import CreateAccountInput from "../../src/account/aplication/dto/CreateAccountIn
 import CreateAccount from "../../src/account/aplication/usecase/CreateAccount";
 import DisableAccount from "../../src/account/aplication/usecase/DisableAccount";
 import AccountRepositoryMemory from "../../src/account/infra/repository/AccountRepositoryMemory";
-import { EBadRequest } from "../../src/shared/extend/Errors";
+import { BadRequestError } from "../../src/shared/extend/Errors";
 
 test("Deve desativar uma conta em memória", async function () {
   const accountRepository = new AccountRepositoryMemory();
@@ -22,5 +22,5 @@ test("Não deve desativar uma conta em memória já desativada", async function 
   const disableAccount = new DisableAccount(accountRepository);
   const createOutput = await createAccount.execute(createInput);
   await disableAccount.execute(createOutput.code);
-  await expect(disableAccount.execute(createOutput.code)).rejects.toThrow(new EBadRequest("Account is already disabled"));
+  await expect(disableAccount.execute(createOutput.code)).rejects.toThrow(new BadRequestError("Account is already disabled"));
 });

@@ -1,40 +1,38 @@
 import Account from "../../domain/entity/Account";
 import IDatabaseConnection from "../../../shared/infra/database/IDatabaseConnection";
 import IAccountRepository from "../../domain/repository/IAccountRepository";
-import { Connection } from "typeorm";
+import { Connection, EntityTarget, Repository } from "typeorm";
 import { AccountEntity } from "../../../shared/infra/database/entity/AccountEntity";
 
 export default class AccountRepositoryDatabase implements IAccountRepository {
   constructor(readonly databaseConnection: IDatabaseConnection) { }
 
   async save(account: Account): Promise<void> {
-    const connection: Connection = await this.databaseConnection.getConnection();
-    const repository = connection.manager.getRepository(AccountEntity);
-    const entity = new AccountEntity();
-    entity.code = account.code;
-    entity.name = account.name;
-    entity.cpf = account.cpf;
-    entity.phone = account.phone;
-    entity.adress = account.adress;
-    entity.createdAt = account.createdAt;
-    entity.disabledAt = account.disabledAt;
+    const repository: Repository<AccountEntity> = await this.getRepository(AccountEntity);
+    const entity = new AccountEntity({
+      code: account.code,
+      name: account.name,
+      cpf: account.cpf,
+      phone: account.phone,
+      adress: account.adress,
+      createdAt: account.createdAt,
+      disabledAt: account.disabledAt,
+    });
     await repository.save(entity);
   }
 
-  async getByCode(code: number): Promise<Account | any> {
-    const connection: Connection = await this.databaseConnection.getConnection();
-    const repository = connection.manager.getRepository(AccountEntity);
+  async getByCode(code: number): Promise<Account | undefined> {
+    const repository: Repository<AccountEntity> = await this.getRepository(AccountEntity);
     const accountData = await repository.findOne({ code: code });
     if (accountData)
       return new Account(accountData.name, accountData.cpf, accountData.phone,
         accountData.adress, accountData.code, accountData.createdAt, accountData.disabledAt);
-    return null;
+    return undefined;
   }
 
-  async getAll(): Promise<Account[] | any> {
+  async getAll(): Promise<Account[] | undefined> {
     const accounts: Account[] = [];
-    const connection: Connection = await this.databaseConnection.getConnection();
-    const repository = connection.manager.getRepository(AccountEntity);
+    const repository: Repository<AccountEntity> = await this.getRepository(AccountEntity);
     const accountData = await repository.find();
     if (accountData)
       for (const account of accountData)
@@ -43,14 +41,13 @@ export default class AccountRepositoryDatabase implements IAccountRepository {
     return accounts;
   }
 
-  async getByCpf(cpf: string): Promise<Account | any> {
-    const connection: Connection = await this.databaseConnection.getConnection();
-    const repository = connection.manager.getRepository(AccountEntity);
+  async getByCpf(cpf: string): Promise<Account | undefined> {
+    const repository: Repository<AccountEntity> = await this.getRepository(AccountEntity);
     const accountData = await repository.findOne({ cpf: cpf });
     if (accountData)
       return new Account(accountData.name, accountData.cpf, accountData.phone,
         accountData.adress, accountData.code, accountData.createdAt, accountData.disabledAt);
-    return null;
+    return undefined;
   }
 
   async update(account: Account): Promise<void> {
@@ -58,8 +55,12 @@ export default class AccountRepositoryDatabase implements IAccountRepository {
   }
 
   async count(): Promise<number> {
-    const connection: Connection = await this.databaseConnection.getConnection();
-    const repository = connection.manager.getRepository(AccountEntity);
+    const repository: Repository<AccountEntity> = await this.getRepository(AccountEntity);
     return repository.count();
+  }
+
+  async getRepository<Entity>(target: EntityTarget<Entity>): Promise<Repository<Entity>> {
+    const connection: Connection = await this.databaseConnection.getConnection();
+    return connection.manager.getRepository(target);
   }
 }

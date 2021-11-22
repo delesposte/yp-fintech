@@ -1,7 +1,7 @@
 import CreateAccountInput from "../../src/account/aplication/dto/CreateAccountInput";
 import CreateAccount from "../../src/account/aplication/usecase/CreateAccount";
 import AccountRepositoryMemory from "../../src/account/infra/repository/AccountRepositoryMemory";
-import { EBadRequest } from "../../src/shared/extend/Errors";
+import { BadRequestError } from "../../src/shared/extend/Errors";
 
 test("Deve criar uma conta em memória", async function () {
   const accountRepository = new AccountRepositoryMemory();
@@ -18,5 +18,5 @@ test("Não deve criar mais de uma conta em memória por CPF", async function () 
   const createInputB = new CreateAccountInput("Zezinho Legal", "453.077.680-87", "28999466070", "Rua legal");
   const createAccount = new CreateAccount(accountRepository);
   await createAccount.execute(createInputA);
-  await expect(createAccount.execute(createInputB)).rejects.toThrow(new EBadRequest("There is already an account for this cpf"));
+  await expect(createAccount.execute(createInputB)).rejects.toThrow(new BadRequestError("There is already an account for this cpf"));
 });

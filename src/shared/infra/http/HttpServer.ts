@@ -2,7 +2,7 @@ import IHttp from "./IHttp";
 import HttpStatus from "./HttpStatus";
 import express from "express";
 import Config from "../config/config";
-import { EBadRequest, ENotFound, EUnauthorized, EForbidden } from "../../extend/Errors";
+import { BadRequestError, NotFoundError, UnauthorizedError, ForbiddenError } from "../../extend/Errors";
 
 export default class HttpServer implements IHttp {
   private app: any;
@@ -24,13 +24,13 @@ export default class HttpServer implements IHttp {
         const result = await fn(req.params, req.body);
         res.status(successStatusCode).json(result);
       } catch (error: any) {
-        if (error instanceof EBadRequest)
+        if (error instanceof BadRequestError)
           res.status(HttpStatus.BadRequest).json(error.message);
-        else if (error instanceof ENotFound)
+        else if (error instanceof NotFoundError)
           res.status(HttpStatus.NotFound).json(error.message);
-        else if (error instanceof EUnauthorized)
+        else if (error instanceof UnauthorizedError)
           res.status(HttpStatus.Unauthorized).json(error.message);
-        else if (error instanceof EForbidden)
+        else if (error instanceof ForbiddenError)
           res.status(HttpStatus.Forbidden).json(error.message);
         else
           res.status(HttpStatus.InternalServerError).json(error.message);
@@ -41,4 +41,5 @@ export default class HttpServer implements IHttp {
   listen(): void {
     this.app.listen(this.config.API_PORT, () => console.log('API is running on ' + this.config.API_URL));
   }
+  
 }
