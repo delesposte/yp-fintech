@@ -10,7 +10,7 @@ import DisableAccount from "../../src/account/aplication/usecase/DisableAccount"
 import EnableAccount from "../../src/account/aplication/usecase/EnableAccount";
 import GetAccounts from "../../src/account/aplication/query/GetAccounts";
 
-describe("end-to-end", function () {
+describe("Test end-to-end", function () {
   const config = new Config();
   config.DB_TYPE = 'postgres';
   config.DB_HOST = 'localhost';
