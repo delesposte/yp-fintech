@@ -48,7 +48,7 @@ A collection possui os métodos
 * [Express](https://expressjs.com/) - Servidor http
 * [Docker](https://www.docker.com/) - Provedor de containers
 
-## License
+## Licença
 
 Este software é de código aberto, licenciado sobre a MIT License (MIT). Veja a [LICENÇA](https://github.com/controlabs/php-http-exceptions/blob/master/LICENSE) para detalhes.
 
