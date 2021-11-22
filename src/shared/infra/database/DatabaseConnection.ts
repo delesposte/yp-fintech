@@ -11,7 +11,7 @@ export default class DatabaseConnection implements IDatabaseConnection {
   constructor(config: Config) {
     this.config = config;
   }
-
+  
   async getConnection(): Promise<Connection> {
     if (!this.fConnection) {
       const options = {
@@ -30,6 +30,10 @@ export default class DatabaseConnection implements IDatabaseConnection {
       this.fConnection = await createConnection(options);
     }
     return this.fConnection
+  }
+
+  async closeConnection(): Promise<void> {
+    if (this.fConnection) await this.fConnection.close();
   }
 
   executeStatement(statement: string, params: any) {

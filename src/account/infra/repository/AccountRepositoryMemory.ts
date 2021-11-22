@@ -4,11 +4,12 @@ import Account from "../../domain/entity/Account";
 import IAccountRepository from "../../domain/repository/IAccountRepository";
 
 export default class AccountRepositoryMemory implements IAccountRepository {
-  private readonly memory: any[] = [];
+  private memory: any[] = [];
 
   constructor(readonly IDatabaseConnection?: IDatabaseConnection) { }
 
   async save(account: Account): Promise<void> {
+    if (!account) throw new BadRequestError("Account not informed");
     this.memory.push(account);
   }
 
@@ -41,6 +42,11 @@ export default class AccountRepositoryMemory implements IAccountRepository {
     const accountData = this.memory.find(item => item.code === account.code);
     if (!accountData) throw new NotFoundError("Account not found");
     Object.assign(accountData, account);
+  }
+
+  async delete(code: number): Promise<void> {
+    if (!code) throw new BadRequestError("Account code not informed");
+    this.memory = this.memory.filter(item => item.code !== code);
   }
 
   async count(): Promise<number> {

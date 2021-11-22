@@ -12,7 +12,6 @@ test("Deve criar uma conta em memória", async function () {
 });
 
 test("Não deve criar mais de uma conta em memória por CPF", async function () {
-  const memory: any = [];
   const accountRepository = new AccountRepositoryMemory();
   const createInputA = new CreateAccountInput("Zezinho Legal", "453.077.680-87", "28999466070", "Rua legal");
   const createInputB = new CreateAccountInput("Zezinho Legal", "453.077.680-87", "28999466070", "Rua legal");

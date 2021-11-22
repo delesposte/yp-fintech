@@ -5,10 +5,10 @@ export default class Config {
   public readonly API_HOST: string;
   public readonly API_PORT: number;
   public readonly API_TOKEN_ENCRYPT_PWD: string;
-  public readonly DB_TYPE: string | any;
+  public DB_TYPE: string | any;
   public readonly DB_USER: string;
   public readonly DB_PASSWORD: string;
-  public readonly DB_HOST: string;
+  public DB_HOST: string;
   public readonly DB_DATABASE: string;
   public readonly DB_PORT: number;
 

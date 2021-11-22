@@ -3,11 +3,13 @@ import IDatabaseConnection from "../../../shared/infra/database/IDatabaseConnect
 import IAccountRepository from "../../domain/repository/IAccountRepository";
 import { Connection, EntityTarget, Repository } from "typeorm";
 import { AccountEntity } from "../../../shared/infra/database/entity/AccountEntity";
+import { BadRequestError, NotFoundError } from "../../../shared/extend/Errors";
 
 export default class AccountRepositoryDatabase implements IAccountRepository {
   constructor(readonly databaseConnection: IDatabaseConnection) { }
 
   async save(account: Account): Promise<void> {
+    if (!account) throw new BadRequestError("Account not informed");
     const repository: Repository<AccountEntity> = await this.getRepository(AccountEntity);
     const entity = new AccountEntity({
       code: account.code,
@@ -22,6 +24,7 @@ export default class AccountRepositoryDatabase implements IAccountRepository {
   }
 
   async getByCode(code: number): Promise<Account | undefined> {
+    if (!code) throw new BadRequestError("Account code not informed");
     const repository: Repository<AccountEntity> = await this.getRepository(AccountEntity);
     const accountData = await repository.findOne({ code: code });
     if (accountData)
@@ -30,7 +33,7 @@ export default class AccountRepositoryDatabase implements IAccountRepository {
     return undefined;
   }
 
-  async getAll(): Promise<Account[] | undefined> {
+  async getAll(): Promise<Account[]> {
     const accounts: Account[] = [];
     const repository: Repository<AccountEntity> = await this.getRepository(AccountEntity);
     const accountData = await repository.find();
@@ -42,6 +45,7 @@ export default class AccountRepositoryDatabase implements IAccountRepository {
   }
 
   async getByCpf(cpf: string): Promise<Account | undefined> {
+    if (!cpf) throw new BadRequestError("Account cpf not informed");
     const repository: Repository<AccountEntity> = await this.getRepository(AccountEntity);
     const accountData = await repository.findOne({ cpf: cpf });
     if (accountData)
@@ -52,6 +56,12 @@ export default class AccountRepositoryDatabase implements IAccountRepository {
 
   async update(account: Account): Promise<void> {
     await this.save(account);
+  }
+
+  async delete(code: number): Promise<void> {
+    if (!code) throw new BadRequestError("Account code not informed");
+    const repository: Repository<AccountEntity> = await this.getRepository(AccountEntity);
+    await repository.delete({ code: code });
   }
 
   async count(): Promise<number> {
