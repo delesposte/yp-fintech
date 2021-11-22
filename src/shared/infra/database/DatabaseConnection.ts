@@ -2,6 +2,7 @@ import "reflect-metadata";
 import Config from "../config/config";
 import IDatabaseConnection from "./IDatabaseConnection";
 import { Connection, createConnection } from "typeorm";
+import { AccountEntity } from "./entity/AccountEntity";
 
 export default class DatabaseConnection implements IDatabaseConnection {
   public config: Config;
@@ -21,7 +22,7 @@ export default class DatabaseConnection implements IDatabaseConnection {
         password: this.config.DB_PASSWORD,
         database: this.config.DB_DATABASE,
         entities: [
-          __dirname + "/entity/*.ts"
+          AccountEntity
         ],
         synchronize: true,
         logging: false

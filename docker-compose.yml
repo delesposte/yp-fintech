@@ -24,7 +24,7 @@ services:
     ports:
       - 5050:80
     networks:
-      - postgres    
+      - postgres
 
   api-yp-fintech:
     container_name: api-yp-fintech
@@ -39,7 +39,9 @@ services:
       - "3000:3000"
       - "9222:9222"
     command: bash -c "npm install && npm start"
+    networks:
+      - postgres
 
 networks:
   postgres:
-    driver: bridge  
+    driver: bridge
