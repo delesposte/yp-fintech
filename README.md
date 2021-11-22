@@ -50,5 +50,5 @@ A collection possui os métodos
 
 ## License
 
-Este software é de código aberto, licenciado sobre a MIT License (MIT). Veja [LICENÇA](https://github.com/controlabs/php-http-exceptions/blob/master/LICENSE) para detalhes.
+Este software é de código aberto, licenciado sobre a MIT License (MIT). Veja a [LICENÇA](https://github.com/controlabs/php-http-exceptions/blob/master/LICENSE) para detalhes.
 
