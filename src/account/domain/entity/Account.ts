@@ -7,13 +7,13 @@ export default class Account {
   private fCode: AccountCode;
   private fCpf: Cpf;
   private fPhone: Phone;
-  private fDisabledAt: Date | unknown = null;
+  private fDisabledAt: Date | any = null;
   private fName: string = '';
   public adress: string;
   public readonly createdAt: Date;
 
   constructor(name: string, cpf: string, phone: string, adress: string, codeValue: number = 0,
-    createdAt: Date = new Date(), DisabledAt: Date | unknown = null) {
+    createdAt: Date = new Date(), DisabledAt: Date | any = null) {
     this.fCode = new AccountCode(codeValue);
     this.name = name;
     this.fCpf = new Cpf(cpf);
@@ -58,7 +58,7 @@ export default class Account {
     this.fDisabledAt = null;
   }
 
-  get disabledAt() {
+  get disabledAt(): Date{
     return this.fDisabledAt;
   }
 }

@@ -1,15 +1,45 @@
 version: '3'
-services:   
+
+services:
+  postgres:
+    container_name: postgres-container
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: db
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@email.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - 5050:80
+    networks:
+      - postgres    
+
   api-yp-fintech:
     container_name: api-yp-fintech
     image: api-yp-fintech
     restart: always
-    working_dir: /usr/src/app    
+    working_dir: /usr/src/app
     volumes:
       - ./dist/:/usr/src/app/dist
       - ./package.json:/usr/src/app/package.json
       - ./.env:/usr/src/app/.env
     ports:
-      - "3000:3000" 
-      - "9222:9222"     
+      - "3000:3000"
+      - "9222:9222"
     command: bash -c "npm install && npm start"
+
+networks:
+  postgres:
+    driver: bridge  

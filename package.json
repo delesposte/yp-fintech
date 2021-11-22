@@ -9,16 +9,17 @@
     "test:single": "npx jest ./ops-lotes.test.js --detectOpenHandles",
     "test:coverage": "jest --coverage",
     "build": "rimraf dist && tsc --build",
-    "build:w": "tsc -w",    
+    "build:w": "tsc -w",
     "start": "nodemon -L --watch dist -e js ./dist/index.js",
-    "start:d": "nodemon -L --watch dist --inspect=0.0.0.0:9222 --nolazy ./dist/index.js",            
-    "deploy": "npm run build && docker-compose up"
+    "start:d": "nodemon -L --watch dist --inspect=0.0.0.0:9222 --nolazy ./dist/index.js",
+    "deploy": "npm run build && docker-compose up -d"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/express": "^4.17.13",
     "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.9",
     "@typescript-eslint/eslint-plugin": "^4.31.2",
     "@typescript-eslint/parser": "^4.31.2",
     "eslint": "^7.32.0",
@@ -37,6 +38,9 @@
   "dependencies": {
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "pg": "^8.7.1",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.41"
   }
 }
