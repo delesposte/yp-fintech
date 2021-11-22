@@ -1,5 +1,7 @@
 # Yp Fintech
-Exemplo de API com TypeScript + Clean Architecture + TypeORM + Postgresql + Express + Docker
+O projeto consiste em uma API de exemplo de um cadastro de contas de uma fintech.
+
+Pensando na qualidade do objeto do estudo de caso, foram levados em consideração boas práticas para desenvolvimento de softwares, testes unitários, testes de integração e elementos como Design Patterns, POO, SOLID, entre outros.
 
 ## 🔧 Instalação & Execução
 Clone do repositório
@@ -30,7 +32,7 @@ A collection possui os métodos
  createAccount -> Cria uma conta. Obs.: só é permitido uma conta por CPF
  disableAccount -> Desativa uma conta
  enableAccount -> Ativa uma conta
- changeAccount -> Altera uma conta. Obs.: só é permitido o telefone e o endereço
+ changeAccount -> Altera uma conta. Obs.: só é permitido alterar o telefone e o endereço
 ```
 
 ## 🛠️ Construído com
