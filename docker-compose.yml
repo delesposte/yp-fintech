@@ -2,14 +2,14 @@ version: '3'
 services:   
   api-yp-fintech:
     container_name: api-yp-fintech
-    build: .
     image: api-yp-fintech
     restart: always
+    working_dir: /usr/src/app    
     volumes:
-      - ./dist:/usr/src/app/dist
+      - ./dist/:/usr/src/app/dist
       - ./package.json:/usr/src/app/package.json
       - ./.env:/usr/src/app/.env
     ports:
       - "3000:3000" 
       - "9222:9222"     
-    command: npm run debug-container
+    command: bash -c "npm install && npm start"
