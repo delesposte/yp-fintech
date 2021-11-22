@@ -28,7 +28,7 @@ services:
 
   api-yp-fintech:
     container_name: api-yp-fintech
-    image: api-yp-fintech
+    image: node:latest
     restart: always
     working_dir: /usr/src/app
     volumes:

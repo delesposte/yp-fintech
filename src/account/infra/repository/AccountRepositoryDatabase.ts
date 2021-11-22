@@ -37,11 +37,10 @@ export default class AccountRepositoryDatabase implements IAccountRepository {
     const accounts: Account[] = [];
     const repository: Repository<AccountEntity> = await this.getRepository(AccountEntity);
     const accountData = await repository.find();
-    if (accountData)
-      for (const account of accountData)
-        accounts.push(new Account(account.name, account.cpf, account.phone,
-          account.adress, account.code, account.createdAt, account.disabledAt));
-    return accounts;
+    if (!accountData)
+      return accounts;
+    return accountData.map(account => new Account(account.name, account.cpf, account.phone,
+      account.adress, account.code, account.createdAt, account.disabledAt));
   }
 
   async getByCpf(cpf: string): Promise<Account | undefined> {
