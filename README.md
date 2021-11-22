@@ -1,9 +1,11 @@
 # Yp Fintech
+
 O projeto consiste em uma API de exemplo de um cadastro de contas de uma fintech.
 
 Pensando na qualidade do objeto do estudo de caso, foram levados em consideração boas práticas para desenvolvimento de softwares, testes unitários, testes de integração e elementos como Design Patterns, POO, SOLID, entre outros.
 
 ## 🔧 Instalação & Execução
+
 Clone do repositório
 ```
 git clone https://github.com/delesposte/yp-fintech.git
@@ -20,6 +22,7 @@ npm run deploy
 ```
 
 ## ⚙️ Testes 
+
 Importe a collection no Postman
 ```
 postman.json
@@ -36,6 +39,7 @@ A collection possui os métodos
 ```
 
 ## 🛠️ Construído com
+
 * [Node](https://nodejs.org/en/) - Ambiente de execução
 * [TypeScript](https://www.typescriptlang.org/) - Linguagem de programação
 * [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) - Arquitetura
@@ -43,3 +47,8 @@ A collection possui os métodos
 * [Postgresql](https://www.postgresql.org/) - Banco de dados
 * [Express](https://expressjs.com/) - Servidor http
 * [Docker](https://www.docker.com/) - Provedor de containers
+
+## License
+
+Este software é de código aberto, licenciado sobre a MIT License (MIT). Veja [LICENÇA](https://github.com/controlabs/php-http-exceptions/blob/master/LICENSE) para detalhes.
+
