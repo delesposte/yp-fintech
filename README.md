@@ -2,17 +2,17 @@
 Exemplo de API com TypeScript + Clean Architecture + TypeORM + Postgresql + Express + Docker
 
 ## 🔧 Instalação & Execução
-Clone do repositório-> 
+Clone do repositório
 ```
 git clone https://github.com/delesposte/yp-fintech.git
 ```
 
-Instalação das dependências -> 
+Instalação das dependências
 ```
 npm i
 ```
 
-Deploy da aplicação (app + bd) em containers do Docker -> 
+Deploy da aplicação (app + bd) em containers do Docker
 ```
 npm run deploy
 ```
@@ -25,12 +25,12 @@ postman.json
 
 A collection possui os métodos
 ```
- - getIsAPIRunning -> Testa se a API está executando
- - getAccounts -> Recupera a lista de contas cadastradas
- - createAccount -> Cria uma conta. Obs.: só é permitido uma conta por CPF
- - disableAccount -> Desativa uma conta
- - enableAccount -> Ativa uma conta
- - changeAccount -> Altera uma conta. Obs.: só é permitido o telefone e o endereço
+ getIsAPIRunning -> Testa se a API está executando
+ getAccounts -> Recupera a lista de contas cadastradas
+ createAccount -> Cria uma conta. Obs.: só é permitido uma conta por CPF
+ disableAccount -> Desativa uma conta
+ enableAccount -> Ativa uma conta
+ changeAccount -> Altera uma conta. Obs.: só é permitido o telefone e o endereço
 ```
 
 ## 🛠️ Construído com
