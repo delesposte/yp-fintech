@@ -4,9 +4,9 @@ import Cpf from "./Cpf";
 import Phone from "./Phone";
 
 export default class Account {
-  private fCode: AccountCode;
-  private fCpf: Cpf;
-  private fPhone: Phone;
+  private _code: AccountCode;
+  private _cpf: Cpf;
+  private _phone: Phone;
   private fDisabledAt: Date | any = null;
   private fName: string = '';
   public adress: string;
@@ -14,10 +14,10 @@ export default class Account {
 
   constructor(name: string, cpf: string, phone: string, adress: string, codeValue: number = 0,
     createdAt: Date = new Date(), DisabledAt: Date | any = null) {
-    this.fCode = new AccountCode(codeValue);
+    this._code = new AccountCode(codeValue);
     this.name = name;
-    this.fCpf = new Cpf(cpf);
-    this.fPhone = new Phone(phone);
+    this._cpf = new Cpf(cpf);
+    this._phone = new Phone(phone);
     this.adress = adress;
     this.createdAt = createdAt;
     this.fDisabledAt = DisabledAt;
@@ -33,19 +33,19 @@ export default class Account {
   }
 
   get code() {
-    return this.fCode.value;
+    return this._code.value;
   }
 
   get cpf() {
-    return this.fCpf.value;
+    return this._cpf.value;
   }
 
   get phone() {
-    return this.fPhone.value;
+    return this._phone.value;
   }
 
   set phone(value: string) {
-    this.fPhone = new Phone(value);
+    this._phone = new Phone(value);
   }
 
   disable() {
@@ -58,7 +58,7 @@ export default class Account {
     this.fDisabledAt = null;
   }
 
-  get disabledAt(): Date{
+  get disabledAt(): Date {
     return this.fDisabledAt;
   }
 }
