@@ -22,11 +22,8 @@ export default class AccountRepositoryMemory implements IAccountRepository {
   }
 
   async getAll(): Promise<Account[]> {
-    const accounts: Account[] = [];
-    for (const accountData of this.memory)
-      accounts.push(new Account(accountData.name, accountData.cpf, accountData.phone,
-        accountData.adress, accountData.code, accountData.createdAt, accountData.disabledAt));
-    return accounts;
+    return this.memory.map(account => new Account(account.name, account.cpf, account.phone,
+      account.adress, account.code, account.createdAt, account.disabledAt));
   }
 
   async getByCpf(cpf: string): Promise<Account | undefined> {
