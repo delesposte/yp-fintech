@@ -7,9 +7,9 @@ Clone do repositório->
 git clone https://github.com/delesposte/yp-fintech.git
 ```
 
-Instalação das dependências -> np
+Instalação das dependências -> 
 ```
-m i
+npm i
 ```
 
 Deploy da aplicação (app + bd) em containers do Docker -> 
