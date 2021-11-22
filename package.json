@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "debug": "npx tsnd --respawn --transpile-only --ignore-watch node_modules --no-notify --cls --rs ./src/index.ts",
+    "debug-container": "node --inspect=0.0.0.0:9222 --nolazy ./dist/index.js",    
     "test": "jest --passWithNoTests --noStackTrace --runInBand --detectOpenHandles",
     "test:single": "npx jest ./ops-lotes.test.js --detectOpenHandles",
     "test:coverage": "jest --coverage",

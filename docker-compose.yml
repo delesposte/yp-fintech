@@ -7,6 +7,9 @@ services:
     restart: always
     volumes:
       - ./dist:/usr/src/app/dist
+      - ./package.json:/usr/src/app/package.json
+      - ./.env:/usr/src/app/.env
     ports:
-      - "3000:3000"      
-    command: npm start
+      - "3000:3000" 
+      - "9222:9222"     
+    command: npm run debug-container
