@@ -12,7 +12,7 @@
     "build:w": "tsc -w",
     "start": "nodemon -L --watch dist -e js ./dist/index.js",
     "start:d": "nodemon -L --watch dist --inspect=0.0.0.0:9222 --nolazy ./dist/index.js",
-    "deploy": "npm run build && docker-compose up -d"
+    "deploy": "npm run build && docker-compose up"
   },
   "author": "",
   "license": "ISC",
