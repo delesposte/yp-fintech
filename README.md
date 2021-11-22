@@ -36,6 +36,7 @@ A collection possui os métodos
 ```
 
 ## 🛠️ Construído com
+* [Node](https://nodejs.org/en/) - Ambiente de execução
 * [TypeScript](https://www.typescriptlang.org/) - Linguagem de programação
 * [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) - Arquitetura
 * [TypeORM](https://typeorm.io/#/) - ORM
