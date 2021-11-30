@@ -14,7 +14,7 @@ export default class Config {
   public readonly DB_DATABASE: string;
   public readonly DB_PORT: number;
 
-  constructor(dbType: string = '', dbHost: string = '') {
+  constructor(dbType: string = '', dbHost: string = '', dbDataBase: string = '') {
     this.configDotenv();
     this.NODE_ENV = process.env.NODE_ENV ? process.env.NODE_ENV : '';
     this.API_HOST = process.env.API_HOST ? process.env.API_HOST : '';
@@ -24,7 +24,7 @@ export default class Config {
     this.DB_USER = process.env.DB_USER ? process.env.DB_USER : '';
     this.DB_PASSWORD = process.env.DB_PASSWORD ? process.env.DB_PASSWORD : '';
     this.DB_HOST = dbHost ? dbHost : (process.env.DB_HOST ? process.env.DB_HOST : '');
-    this.DB_DATABASE = process.env.DB_DATABASE ? process.env.DB_DATABASE : '';
+    this.DB_DATABASE = dbDataBase ? dbDataBase : (process.env.DB_DATABASE ? process.env.DB_DATABASE : '');
     this.DB_PORT = Number(process.env.DB_PORT);
     this.check();
   }

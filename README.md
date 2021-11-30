@@ -30,7 +30,7 @@ postman.json
 
 A collection possui os métodos
 ```
- getIsAPIRunning -> Testa se a API está executando
+ getApiStatus -> Testa se a API está executando
  getAccounts -> Recupera a lista de contas cadastradas
  createAccount -> Cria uma conta. Obs.: só é permitido uma conta por CPF
  disableAccount -> Desativa uma conta

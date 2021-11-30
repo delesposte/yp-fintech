@@ -3,7 +3,7 @@ import IDatabaseConnection from "../../../shared/infra/database/IDatabaseConnect
 import IAccountRepository from "../../domain/repository/IAccountRepository";
 import { Connection, EntityTarget, Repository } from "typeorm";
 import { AccountEntity } from "../../../shared/infra/database/entity/AccountEntity";
-import { BadRequestError, NotFoundError } from "../../../shared/extend/Errors";
+import { BadRequestError } from "../../../shared/extend/Errors";
 
 export default class AccountRepositoryDatabase implements IAccountRepository {
   constructor(readonly databaseConnection: IDatabaseConnection) { }

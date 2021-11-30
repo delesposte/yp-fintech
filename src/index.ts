@@ -12,3 +12,13 @@ class App {
 }
 
 App.execute();
+
+/*to-do list
+
+- change repository memory to repository database and use mock;
+- include paths to import best practices;
+- create a test database;
+- create an injection dependency container;
+- improve readme and explain how to test the app with jest and Postman.
+
+*/

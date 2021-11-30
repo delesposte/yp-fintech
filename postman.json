@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "254f43b8-d8d3-454c-a80d-e65c1dcca8ef",
-		"name": "yp-fintech",
+		"name": "YP Fintech",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -44,7 +44,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Zezinho Legal\",\r\n  \"cpf\": \"453.077.680-87\",\r\n  \"phone\": \"28999466070\",\r\n  \"adress\": \"Rua legal\"\r\n}",
+							"raw": "{\r\n  \"name\": \"617.804.160-83\",\r\n  \"cpf\": \"617.804.160-83\",\r\n  \"phone\": \"28999466070\",\r\n  \"adress\": \"Rua legal\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -78,13 +78,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{dominio}}/accounts/1637516471217/disable",
+							"raw": "{{dominio}}/accounts/2110292312/disable",
 							"host": [
 								"{{dominio}}"
 							],
 							"path": [
 								"accounts",
-								"1637516471217",
+								"2110292312",
 								"disable"
 							]
 						}
@@ -106,13 +106,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{dominio}}/accounts/1637516471217/enable",
+							"raw": "{{dominio}}/accounts/2110292312/enable",
 							"host": [
 								"{{dominio}}"
 							],
 							"path": [
 								"accounts",
-								"1637516471217",
+								"2110292312",
 								"enable"
 							]
 						}
@@ -126,7 +126,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"code\": 1637516471217,\r\n    \"phone\": \"28999466070\",\r\n    \"adress\": \"Rua legal\"\r\n}",
+							"raw": "{\r\n    \"code\": 2110292312,\r\n    \"phone\": \"28999466070\",\r\n    \"adress\": \"Rua legal xxxxxxxx\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -148,7 +148,7 @@
 			]
 		},
 		{
-			"name": "getIsAPIRunning",
+			"name": "getApiStatus",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},

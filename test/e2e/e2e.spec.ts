@@ -4,6 +4,7 @@ import AccountOutput from "../../src/account/aplication/dto/AccountOutput";
 import CreateAccount from "../../src/account/aplication/usecase/CreateAccount";
 import ChangeAccount from "../../src/account/aplication/usecase/ChangeAccount";
 import DeleteAccount from "../../src/account/aplication/usecase/DeleteAccount";
+import DeleteAllAccounts from "../../src/account/aplication/usecase/DeleteAllAccounts";
 import AccountRepositoryFactory from "../../src/account/infra/factory/AccountRepositoryFactory";
 import DatabaseConnection from "../../src/shared/infra/database/DatabaseConnection";
 import DisableAccount from "../../src/account/aplication/usecase/DisableAccount";
@@ -26,6 +27,11 @@ afterAll(() => {
 });
 
 describe("e2e", function () {
+  test("Should delete all accounts", async function () {
+    const deleteAllAccounts = new DeleteAllAccounts(accountRepository);
+    await expect(deleteAllAccounts.execute()).resolves.not.toThrow();
+  })
+
   test("Should create an account", async function () {
     const createInput = new CreateAccountInput("Zezinho Legal", "453.077.680-87", "28999466070", "Rua legal");
     const createAccount = new CreateAccount(accountRepository);

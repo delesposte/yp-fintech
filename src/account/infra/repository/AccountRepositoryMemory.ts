@@ -42,7 +42,6 @@ export default class AccountRepositoryMemory implements IAccountRepository {
   }
 
   async delete(code: number): Promise<void> {
-    if (!code) throw new BadRequestError("Account code not informed");
     this.memory = this.memory.filter(item => item.code !== code);
   }
 
