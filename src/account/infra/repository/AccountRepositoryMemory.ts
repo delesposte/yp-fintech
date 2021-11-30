@@ -46,6 +46,10 @@ export default class AccountRepositoryMemory implements IAccountRepository {
     this.memory = this.memory.filter(item => item.code !== code);
   }
 
+  async deleteAll(): Promise<void> {
+    this.memory = [];
+  }
+
   async count(): Promise<number> {
     return this.memory.length;
   }

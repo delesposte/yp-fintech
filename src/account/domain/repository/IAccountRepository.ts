@@ -8,4 +8,5 @@ export default interface IAccountRepository {
   getByCpf(cpf: string): Promise<Account | undefined>;
   update(account: Account): Promise<void>;
   delete(code: number): Promise<void>;
+  deleteAll(): Promise<void>;
 }

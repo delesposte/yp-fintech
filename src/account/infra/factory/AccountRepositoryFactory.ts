@@ -7,7 +7,7 @@ export default class AccountRepositoryFactory {
   constructor(private readonly databaseConnection: IDatabaseConnection) { }
 
   createAccountRepository(): IAccountRepository {
-    if (this.databaseConnection.config.isRepositoryMemory())
+    if (this.databaseConnection.isRepositoryMemory())
       return new AccountRepositoryMemory(this.databaseConnection);
     return new AccountRepositoryDatabase(this.databaseConnection);
   }

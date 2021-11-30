@@ -1,19 +1,19 @@
 import AccountsController from "../../../account/infra/controller/AccountsController";
-import IDatabaseConnection from "../database/IDatabaseConnection";
 import HttpStatus from "./HttpStatus";
 import IHttp from "./IHttp";
+import Config from "../config/config";
 
 export default class Router {
   private readonly accountsController: AccountsController;
 
-  constructor(readonly http: IHttp, readonly DatabaseConnection: IDatabaseConnection) {
-    this.accountsController = new AccountsController(this.DatabaseConnection);
+  constructor(private readonly http: IHttp, private readonly config: Config) {
+    this.accountsController = new AccountsController(config);
     this.configure();
   }
 
   private configure() {
     this.http.on("/", "get", HttpStatus.OK, async (params: any, body: any) => {
-      return { message: 'API is running on ' + this.DatabaseConnection.config.API_URL };
+      return { message: 'API is running on ' + this.config.API_URL };
     });
 
     this.http.on("/accounts", "post", HttpStatus.Created, async (params: any, body: any) => {

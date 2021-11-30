@@ -5,13 +5,10 @@ import { Connection, createConnection } from "typeorm";
 import { AccountEntity } from "./entity/AccountEntity";
 
 export default class DatabaseConnection implements IDatabaseConnection {
-  public config: Config;
   public fConnection: Promise<Connection> | any = null;
 
-  constructor(config: Config) {
-    this.config = config;
-  }
-  
+  constructor(private readonly config: Config) { }
+
   async getConnection(): Promise<Connection> {
     if (!this.fConnection) {
       const options = {
@@ -38,5 +35,9 @@ export default class DatabaseConnection implements IDatabaseConnection {
 
   executeStatement(statement: string, params: any) {
     return {};
+  }
+
+  isRepositoryMemory(): boolean {
+    return this.config.isRepositoryMemory();
   }
 }

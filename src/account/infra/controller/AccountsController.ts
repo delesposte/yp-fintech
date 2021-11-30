@@ -1,3 +1,4 @@
+
 import GetAccounts from "../../aplication/query/GetAccounts";
 import ChangeAccount from "../../aplication/usecase/ChangeAccount";
 import CreateAccount from "../../aplication/usecase/CreateAccount";
@@ -7,12 +8,15 @@ import IAccountRepository from "../../domain/repository/IAccountRepository";
 import IDatabaseConnection from "shared/infra/database/IDatabaseConnection";
 import AccountRepositoryFactory from "../factory/AccountRepositoryFactory";
 import CreateAccountInputAssembler from "../../aplication/dto/CreateAccountInputAssembler";
+import DatabaseConnection from "../../../shared/infra/database/DatabaseConnection";
+import Config from '../../../shared/infra/config/config';
 
 export default class AccountsController {
   private accountRepository: IAccountRepository;
 
-  constructor(readonly databaseConnection: IDatabaseConnection) {
-    const accountRepositoryFactory = new AccountRepositoryFactory(this.databaseConnection);
+  constructor(private readonly config: Config) {
+    const databaseConnection: IDatabaseConnection = new DatabaseConnection(this.config);
+    const accountRepositoryFactory = new AccountRepositoryFactory(databaseConnection);
     this.accountRepository = accountRepositoryFactory.createAccountRepository();
   }
 

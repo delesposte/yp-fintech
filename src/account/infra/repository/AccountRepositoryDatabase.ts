@@ -63,6 +63,15 @@ export default class AccountRepositoryDatabase implements IAccountRepository {
     await repository.delete({ code: code });
   }
 
+  async deleteAll(): Promise<void> {
+    const repository: Repository<AccountEntity> = await this.getRepository(AccountEntity);
+    await repository
+      .createQueryBuilder()
+      .delete()
+      .from(AccountEntity)
+      .execute();
+  }
+
   async count(): Promise<number> {
     const repository: Repository<AccountEntity> = await this.getRepository(AccountEntity);
     return repository.count();

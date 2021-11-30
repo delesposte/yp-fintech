@@ -13,7 +13,7 @@ services:
     ports:
       - "5432:5432"
     networks:
-      - postgres
+      - yp-network
 
   pgadmin:
     container_name: pgadmin_container
@@ -24,7 +24,7 @@ services:
     ports:
       - 5050:80
     networks:
-      - postgres
+      - yp-network
 
   api-yp-fintech:
     container_name: api-yp-fintech
@@ -38,10 +38,10 @@ services:
     ports:
       - "3000:3000"
       - "9222:9222"
-    command: bash -c "npm install && npm start"
+    command: bash -c "npm install && npm run debug:container"
     networks:
-      - postgres
+      - yp-network
 
 networks:
-  postgres:
+  yp-network:
     driver: bridge

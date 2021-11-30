@@ -21,19 +21,20 @@ export default class HttpServer implements IHttp {
   on(url: string, method: string, successStatusCode: number, fn: any): void {
     this.app[method](url, async function (req: any, res: any) {
       try {
-        const result = await fn(req.params, req.body);
-        res.status(successStatusCode).json(result);
+        const sucessResponse = await fn(req.params, req.body);
+        res.status(successStatusCode).json(sucessResponse);
       } catch (error: any) {
+        const errorResponse = { message: error.message };
         if (error instanceof BadRequestError)
-          res.status(HttpStatus.BadRequest).json(error.message);
+          res.status(HttpStatus.BadRequest).json(errorResponse);
         else if (error instanceof NotFoundError)
-          res.status(HttpStatus.NotFound).json(error.message);
+          res.status(HttpStatus.NotFound).json(errorResponse);
         else if (error instanceof UnauthorizedError)
-          res.status(HttpStatus.Unauthorized).json(error.message);
+          res.status(HttpStatus.Unauthorized).json(errorResponse);
         else if (error instanceof ForbiddenError)
-          res.status(HttpStatus.Forbidden).json(error.message);
+          res.status(HttpStatus.Forbidden).json(errorResponse);
         else
-          res.status(HttpStatus.InternalServerError).json(error.message);
+          res.status(HttpStatus.InternalServerError).json(errorResponse);
       }
     });
   }
@@ -41,5 +42,5 @@ export default class HttpServer implements IHttp {
   listen(): void {
     this.app.listen(this.config.API_PORT, () => console.log('API is running on ' + this.config.API_URL));
   }
-  
+
 }
