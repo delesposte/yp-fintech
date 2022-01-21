@@ -1,29 +1,54 @@
-import CreateAccountInput from "../../src/account/aplication/dto/CreateAccountInput";
-import CreateAccount from "../../src/account/aplication/usecase/CreateAccount";
 import ChangeAccount from "../../src/account/aplication/usecase/ChangeAccount";
-import AccountRepositoryMemory from "../../src/account/infra/repository/AccountRepositoryMemory";
-import { anything, instance, mock, verify, when } from "ts-mockito";
-import { BadRequestError } from "../../src/shared/extend/Errors";
+import { NotFoundError } from "../../src/shared/extend/Errors";
+import IAccountRepository from "../../src/account/domain/repository/IAccountRepository";
+import Account from "../../src/account/domain/entity/Account";
+
+const repositoryMocked: jest.Mocked<IAccountRepository> = {
+  save: jest.fn(),
+  count: jest.fn(),
+  getByCode: jest.fn(),
+  getAll: jest.fn(),
+  getByCpf: jest.fn(),
+  update: jest.fn(),
+  delete: jest.fn(),
+  deleteAll: jest.fn()
+}
+
+beforeEach(() => {
+  jest.resetAllMocks();
+})
+
+const accountMocked = {
+  code: 1,
+  phone: "28999467777",
+  adress: "Rua legal new"
+} as Account;
 
 describe("ChangeAccount", function () {
   test("Should change an account", async function () {
-    const accountRepository = new AccountRepositoryMemory();
-    const createInput = new CreateAccountInput("Zezinho Legal", "453.077.680-87", "28999466070", "Rua legal");
-    const createAccount = new CreateAccount(accountRepository);
-    const changeAccount = new ChangeAccount(accountRepository);
-    const createOutput = await createAccount.execute(createInput);
-    const changeOutput = await changeAccount.execute(createOutput.code, "28999467777", "Rua legal new");
-    expect(changeOutput.code).toBe(changeOutput.code);
-    expect(changeOutput.phone).toBe("28999467777");
-    expect(changeOutput.adress).toBe("Rua legal new");
+    repositoryMocked.getByCode.mockResolvedValue(accountMocked);
+
+    const changeAccount = new ChangeAccount(repositoryMocked);
+    const changeOutput = await changeAccount.execute(accountMocked.code, accountMocked.phone, accountMocked.adress);
+
+    expect(changeOutput.code).toBe(accountMocked.code);
+    expect(changeOutput.phone).toBe(accountMocked.phone);
+    expect(changeOutput.adress).toBe(accountMocked.adress);
+    expect(repositoryMocked.getByCode).toBeCalledTimes(1);
+    expect(repositoryMocked.getByCode).toBeCalledWith(accountMocked.code);
+    expect(repositoryMocked.update).toBeCalledTimes(1);
+    expect(repositoryMocked.update).toBeCalledWith(accountMocked);
   });
 
-  test("Should not change an account without phone", async function () {
-    const accountRepository = new AccountRepositoryMemory();
-    const createInput = new CreateAccountInput("Zezinho Legal", "453.077.680-87", "28999466070", "Rua legal");
-    const createAccount = new CreateAccount(accountRepository);
-    const changeAccount = new ChangeAccount(accountRepository);
-    const createOutput = await createAccount.execute(createInput);
-    await expect(changeAccount.execute(createOutput.code, " ", "Rua legal")).rejects.toThrow(new BadRequestError("Invalid phone"));
+  test("Should return an error when not finding an account to change", async function () {
+    repositoryMocked.getByCode.mockResolvedValue(undefined);
+
+    const changeAccount = new ChangeAccount(repositoryMocked);
+
+    await expect(changeAccount.execute(accountMocked.code, accountMocked.phone, accountMocked.adress))
+      .rejects.toThrow(new NotFoundError("Account not found"));
+
+    expect(repositoryMocked.getByCode).toBeCalledTimes(1);
+    expect(repositoryMocked.getByCode).toBeCalledWith(accountMocked.code);
   });
 });
