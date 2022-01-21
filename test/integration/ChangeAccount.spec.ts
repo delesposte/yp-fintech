@@ -1,6 +1,6 @@
 import ChangeAccount from "../../src/account/aplication/usecase/ChangeAccount";
 import { NotFoundError } from "../../src/shared/extend/Errors";
-import AccountRepositoryMockFactory from "../mocks/repositories/AccountRepositoryMockFactory";
+import AccountRepositoryMockFactory from "../mocks/repository/AccountRepositoryMockFactory";
 import AccountFakeFactory from "../fixtures/AccountFakeFactory";
 import IAccountRepository from "../../src/account/domain/repository/IAccountRepository";
 import Account from "../../src/account/domain/entity/Account";
