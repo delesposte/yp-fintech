@@ -7,28 +7,33 @@ Pensando na qualidade do objeto do estudo de caso, foram levados em consideraç�
 ## 🔧 Instalação & Execução
 
 Clone do repositório
+
 ```
 git clone https://github.com/delesposte/yp-fintech.git
 ```
 
 Instalação das dependências
+
 ```
 npm i
 ```
 
 Deploy da aplicação (app + bd) em containers do Docker
+
 ```
 npm run deploy
 ```
 
-## ⚙️ Testes 
+## ⚙️ Testes
 
 Importe a collection no Postman
+
 ```
 postman.json
 ```
 
 A collection possui os métodos
+
 ```
  getApiStatus -> Testa se a API está executando
  getAccounts -> Recupera a lista de contas cadastradas
@@ -40,15 +45,16 @@ A collection possui os métodos
 
 ## 🛠️ Construído com
 
-* [Node](https://nodejs.org/en/) - Ambiente de execução
-* [TypeScript](https://www.typescriptlang.org/) - Linguagem de programação
-* [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) - Arquitetura
-* [TypeORM](https://typeorm.io/#/) - ORM
-* [Postgresql](https://www.postgresql.org/) - Banco de dados
-* [Express](https://expressjs.com/) - Servidor http
-* [Docker](https://www.docker.com/) - Provedor de containers
+- [Node](https://nodejs.org/en/) - Ambiente de execução
+- [TypeScript](https://www.typescriptlang.org/) - Linguagem de programação
+- [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) - Arquitetura
+- [TypeORM](https://typeorm.io/#/) - ORM
+- [Postgresql](https://www.postgresql.org/) - Banco de dados
+- [Express](https://expressjs.com/) - Servidor http
+- [Docker](https://www.docker.com/) - Provedor de containers
 
 ## Licença
 
 Este software é de código aberto, licenciado sobre a MIT License (MIT). Veja a [LICENÇA](https://github.com/controlabs/php-http-exceptions/blob/master/LICENSE) para detalhes.
 
+Obrigado por ler até aqui! =)
